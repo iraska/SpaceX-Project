@@ -5,11 +5,14 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] float mainThrust = 1000;
+    AudioSource audioSource;
+    [SerializeField] float mainThrust = 1000f;
+    [SerializeField] float rotationThrust = 100f;
 
     void Start() 
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,20 +33,44 @@ public class Movement : MonoBehaviour
             // (0, 1, 0) for the rocket to take off.
             rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime); 
             // Decrease SpaceX mass to 0.2f.
+            
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        
+        else
+        {
+            audioSource.Stop();
         }
     }
 
     void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("Rotate left");
+            // Using axis Z
+            // transform.Rotate(Vector3.forward * rotationThrust * Time.deltaTime);
+            ApplyRotation(rotationThrust);
         }
 
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Rotate right");
+            // Vector3.back == (0, 0, -1)
+            // transform.Rotate(Vector3.back * rotationThrust * Time.deltaTime);
+            ApplyRotation(-rotationThrust);
         }
+    }
+
+    // Extract method
+    void ApplyRotation(float rotationThisFrame)
+    {
+        // Freezing rotation so we can manually rotate
+        rb.freezeRotation = true;
+        transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
+        // Unfreezing rotation so the physic system can take over
+        rb.freezeRotation = false;
     }
 
     // GetKeyDown will happen once when you hit the key
