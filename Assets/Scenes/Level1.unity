@@ -184,6 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fce09109c7e55af458c82e264e16c64d, type: 3}
+--- !u!198 &487412076 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3288513380349812040, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+  m_PrefabInstance: {fileID: 2620967165250865400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +283,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!198 &757889618 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5249778277390293144, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+  m_PrefabInstance: {fileID: 2620967165250865400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +372,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 23.115, y: -180.972, z: -1.137}
+--- !u!198 &1745702698 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 432430773567094305, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+  m_PrefabInstance: {fileID: 2620967165250865400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2620967165250865400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,9 +385,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2139060891, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
-      propertyPath: mainThrust
-      value: 1000
-      objectReference: {fileID: 0}
+      propertyPath: mainEngineParticles
+      value: 
+      objectReference: {fileID: 757889618}
+    - target: {fileID: 2139060891, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+      propertyPath: leftThrusterParticles
+      value: 
+      objectReference: {fileID: 487412076}
+    - target: {fileID: 2139060891, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+      propertyPath: rightThrusterParticles
+      value: 
+      objectReference: {fileID: 1745702698}
+    - target: {fileID: 2139060902, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+      propertyPath: winParticles
+      value: 
+      objectReference: {fileID: 2620967165250865401}
+    - target: {fileID: 2139060902, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+      propertyPath: crashParticles
+      value: 
+      objectReference: {fileID: 2620967165250865402}
     - target: {fileID: 1254249154131067229, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
       propertyPath: m_Name
       value: SpaceX
@@ -387,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3619681663814203176, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.74
+      value: 3.05
       objectReference: {fileID: 0}
     - target: {fileID: 3619681663814203176, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
       propertyPath: m_LocalPosition.z
@@ -423,6 +454,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+--- !u!198 &2620967165250865401 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8498445041089398763, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+  m_PrefabInstance: {fileID: 2620967165250865400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2620967165250865402 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7257093559721131282, guid: b8c81caf94b4979439b1933d86735a87, type: 3}
+  m_PrefabInstance: {fileID: 2620967165250865400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2790234128612545747
 PrefabInstance:
   m_ObjectHideFlags: 0

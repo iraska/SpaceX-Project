@@ -3,8 +3,32 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    // PARAMETERS - for tuning, typically set in the editor.
+    [SerializeField] float delay = 2f;
+    [SerializeField] AudioClip crashSound;
+    [SerializeField] AudioClip winSound;
+
+    [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] ParticleSystem winParticles;
+
+    // CACHE - e.g. references for readibility or speed.
+    AudioSource audioSource;
+
+    // STATE - private instance (member) variable
+    bool isTransitioning = false;
+
+    void Start() 
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter(Collision other) 
     {
+        if (isTransitioning) // isTransitioning == true
+        {
+            return; 
+        }
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -12,16 +36,38 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case "Finish":
                 // Debug.Log("Congratulations, you finished!");
-                LoadNextLevel();
-                break;
-            case "Fuel":
-                Debug.Log("Your tank is full!");
+                StartSuccessSequence();
                 break;
             default:
                 // Debug.Log("Ups!!");
-                ReloadLevel();
+                StartCrashSequence();
                 break;
         }
+    }
+
+     void StartSuccessSequence()
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(winSound);
+        // Untick play on awake
+        winParticles.Play();
+        GetComponent<Movement>().enabled = false;
+        Invoke("LoadNextLevel", delay);
+    }
+
+     void StartCrashSequence()
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        // Todo add SFX upon crash
+        audioSource.PlayOneShot(crashSound);
+        // We want to remove the control from player so the player can not be flying after they crash.
+        // So when we crushed, unchecked tickbox (movement script).
+        crashParticles.Play();
+        GetComponent<Movement>().enabled = false;
+        // Get ReloadLevel 1 second after crushing.
+        Invoke("ReloadLevel", delay);
     }
     
     // The game will restart when you hit the obstacle.
