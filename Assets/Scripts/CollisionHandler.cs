@@ -16,15 +16,35 @@ public class CollisionHandler : MonoBehaviour
 
     // STATE - private instance (member) variable
     bool isTransitioning = false;
+    bool collisionDisabled = false;
 
     void Start() 
     {
         audioSource = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {
+        // GetKeyDown will happen once when you hit the key
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled; // toggle collision
+        }
+    }
+
     void OnCollisionEnter(Collision other) 
     {
-        if (isTransitioning) // isTransitioning == true
+        if (isTransitioning || collisionDisabled) // isTransitioning || collisionDisabled == true
         {
             return; 
         }
