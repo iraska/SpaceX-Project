@@ -6,7 +6,8 @@ public class Oscillator : MonoBehaviour
 {
     Vector3 startingPosition;
     [SerializeField] Vector3 movementVector;
-    [SerializeField] [Range(0,1)] float movementFactor;
+    //[SerializeField] [Range(0,1)] float movementFactor;
+    float movementFactor;
     [SerializeField] float period = 2f;
 
     // Start is called before the first frame update
@@ -19,6 +20,9 @@ public class Oscillator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if (period == 0f) { return; } // transform.position assign attempt for 'Oscillator' is not valid. Input position is {NaN, NaN, NaN}
+        if (period <= Mathf.Epsilon) { return; }
+
         // we need to create a mechanism to be measuring time
         // Time.time: how much time has ellapsed
         float cycles = Time.time / period;
