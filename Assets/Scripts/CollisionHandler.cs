@@ -28,6 +28,7 @@ public class CollisionHandler : MonoBehaviour
         RespondToDebugKeys();
     }
 
+    // for developer
     void RespondToDebugKeys()
     {
         // GetKeyDown will happen once when you hit the key
